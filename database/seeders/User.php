@@ -16,22 +16,26 @@ class User extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([            
-            [
-                'name' => 'King Poop',
-                'firstname' => 'King Kong',
-                'age' => 23,
-                'email' => 'kingpoop@gmail.com',
-                'password' => bcrypt('kingpoop'),
-                'photo_id'=> 1
-            ],
+        DB::table('users')->insert([    
             [
                 'name' => 'King Poop',
                 'firstname' => 'King Kong',
                 'age' => 23,
                 'email' => 'kingkong@gmail.com',
                 'password' => bcrypt('kingkong'),
-                'photo_id'=> 2
+                'photo_id'=> 1,
+                'role'=>'admin',
+                'article_id'=>'1',
+            ],        
+            [
+                'name' => 'King Poop',
+                'firstname' => 'King Kong',
+                'age' => 23,
+                'email' => 'kingpoop@gmail.com',
+                'password' => bcrypt('kingpoop'),
+                'photo_id'=> 2,
+                'role' =>'Web master',
+                'article_id'=>'2',
             ],        
             ]);
     }

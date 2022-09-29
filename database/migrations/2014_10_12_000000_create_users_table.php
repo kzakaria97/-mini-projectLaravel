@@ -20,6 +20,8 @@ return new class extends Migration
             $table->integer('age');
             $table->string('email')->unique();
             $table->foreignId('photo_id')->default(1)->constrained();
+            $table->string('role')->default('user');
+            $table->foreignId('article_id')->constrained()->onDelete('cascade');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

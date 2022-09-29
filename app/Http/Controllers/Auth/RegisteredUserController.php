@@ -55,6 +55,7 @@ class RegisteredUserController extends Controller
             'age' => $request->age,
             'email' => $request->email,
             'photo_id' => $storePhoto->id,
+            'role' => $request->role,
             'password' => Hash::make($request->password),
         ]);
 
@@ -63,5 +64,38 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
+    }
+
+    public function index()
+    {
+        $profile = User::all();
+        return view('dashboard',compact('profile'));
+    }
+
+    public function edit(User $user,$id)
+    {
+        $edit = User::find($id);
+        $editPhoto = Photo::all();
+        return view('pages.profile.edit',compact('edit','editPhoto'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $updatePhoto = Photo::find($id);
+        if ($request->file('url') != null) {
+            Storage::delete('public/img/' . $updatePhoto->url);
+            Storage::put('public/img/', $request->file('url'));            
+            $updatePhoto->url = $request->file('url')->hashName();
+            $updatePhoto->save();
+        }
+        $updateProfile = User::find($id);
+        $updateProfile->name = $request->name;
+        $updateProfile->firstname = $request->firstname;
+        $updateProfile->age = $request->age;
+        $updateProfile->email = $request->email;
+        $updateProfile->role = $request->role;
+
+        $updateProfile->save();
+        return redirect()->back();
     }
 }

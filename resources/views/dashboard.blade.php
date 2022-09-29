@@ -10,27 +10,27 @@
               </div> <br>
               <table style="border: solid black 1px; display:flex; justify-content:center">
                   <tr>
+                      <th style="width: 21rem; border: solid black 1px">Avatar</th>
                       <th style="width: 21rem; border: solid black 1px">Name</th>
                       <th style="width: 21rem; border: solid black 1px">FirstName</th>
                       <th style="width: 21rem; border: solid black 1px">Age</th>
                       <th style="width: 21rem; border: solid black 1px">Email</th>
-                      <th style="width: 21rem; border: solid black 1px">Image</th>
                       <th style="width: 21rem; border: solid black 1px">Rôle</th>
                   </tr>
                   <tr>
+                    <th style="border: solid black 1px; display:flex; justify-content: center;align-item:center">
+                        <img width="50px" height="50px" src="storage/img/{{Auth::user()->photo->url}}" alt="">
+                      </th>
                       <th style="border: solid black 1px">{{auth()->user()->name}}</th>
                       <th style="border: solid black 1px">{{auth()->user()->firstname}}</th>
                       <th style="border: solid black 1px">{{auth()->user()->age}}</th>
                       <th style="border: solid black 1px">{{auth()->user()->email}}</th>
-                      <th style="border: solid black 1px; display:flex; justify-content: center;align-item:center">
-                        <img width="50%" height="50%" src="storage/img/{{Auth::user()->photo->url}}" alt="">
-                      </th>
-                      <th style="border: solid black 1px">Admin</th>
+                      <th style="border: solid black 1px">{{auth()->user()->role}}</th>
                   </tr>
               </table>
               <br><br>
               <button style="background-color: green; color:white; border-radius:15%; width:5rem">
-                Edit
+                <a href="/{{auth()->user()->id}}/edit">Edit</a>
               </button>
           </div>
       </div>
