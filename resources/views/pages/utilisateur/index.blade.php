@@ -35,7 +35,7 @@
                             {{$item->age}}
                         </th>
                         <th style="border: solid black 1px; display:flex; justify-content: center;align-item:center">
-                            <img width="50px" height="50px" src="storage/img/{{Auth::user()->photo->url}}" alt="">
+                            <img width="50px" height="50px" src="storage/img/{{$item->photo->url}}" alt="">
                         </th>
                         <th style="border: solid black 1px">
                             <button style="background-color: green; color:white; border-radius:15px; width:5rem">

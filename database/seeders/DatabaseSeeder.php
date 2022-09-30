@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             PhotoSeeder::class,
-            ArticleSeeder::class,
             User::class,
+            ArticleSeeder::class,
         ]);
         
     }

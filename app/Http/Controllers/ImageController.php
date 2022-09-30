@@ -31,9 +31,10 @@ class ImageController extends Controller
      */
     public function create()
     {
-        // $cate = Categorie::all();
-        // $imageCreate = Image::all();
-        // return view('pages.image.index', compact('cate','imageCreate'));
+        $allCategorie = Categorie::all();
+        $allImage = Image::all();
+
+        return view('pages.galerie.index',compact('allCategorie','allImage'));
     }
 
     /**
@@ -100,5 +101,10 @@ class ImageController extends Controller
         $delete->delete();
         Storage::delete('public/img/'.$delete->img);
         return redirect()->back();
+    }
+    public function download($id)
+    {
+        $download = Image::find($id);
+        return Storage::download('public/img/'.$download->img);
     }
 }

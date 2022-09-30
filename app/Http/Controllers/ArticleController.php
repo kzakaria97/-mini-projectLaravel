@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Article;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 
@@ -15,7 +18,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $article = Article::all();
+        $users = User::all();
+
+        return view('pages.article.index',compact('article','users'));
     }
 
     /**
@@ -34,9 +40,15 @@ class ArticleController extends Controller
      * @param  \App\Http\Requests\StoreArticleRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreArticleRequest $request)
-    {
-        //
+    public function store(Request $request)
+    {   
+        $storeArticle = new Article;
+        $storeArticle->title = $request->title;
+        $storeArticle->description = $request->description;
+        $storeArticle->user_id = Auth::user()->id;
+        $storeArticle->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -56,9 +68,10 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function edit(Article $article)
+    public function edit(Article $article,$id)
     {
-        //
+        $edit = Article::find($id);
+        return view('pages.article.edit',compact('edit'));
     }
 
     /**
@@ -68,9 +81,14 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateArticleRequest $request, Article $article)
+    public function update(Request $request, Article $article,$id)
     {
-        //
+        $update = Article::find($id);
+        $update->title = $request->title;
+        $update->description = $request->description;
+        $update->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -79,8 +97,10 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Article $article)
+    public function destroy(Article $article,$id)
     {
-        //
+        $destroy = Article::find($id);
+        $destroy->delete();
+        return redirect()->back();
     }
 }

@@ -18,14 +18,14 @@ class User extends Seeder
     {
         DB::table('users')->insert([    
             [
-                'name' => 'King Poop',
+                'name' => 'King Poopoop',
                 'firstname' => 'King Kong',
                 'age' => 23,
                 'email' => 'kingkong@gmail.com',
                 'password' => bcrypt('kingkong'),
                 'photo_id'=> 1,
                 'role'=>'admin',
-                'article_id'=>'1',
+               
             ],        
             [
                 'name' => 'King Poop',
@@ -35,7 +35,7 @@ class User extends Seeder
                 'password' => bcrypt('kingpoop'),
                 'photo_id'=> 2,
                 'role' =>'Web master',
-                'article_id'=>'2',
+                
             ],        
             ]);
     }

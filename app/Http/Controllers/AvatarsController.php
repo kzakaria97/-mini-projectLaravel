@@ -31,6 +31,12 @@ class AvatarsController extends Controller
     }
     public function destroy($id)
     {
+        $users = User::where('photo_id','=',$id)->get();
+        foreach($users as $user)
+        {
+            $user->photo_id=1;
+            $user->save();
+        }
         $delete = Photo::find($id);
         $delete->delete();
         Storage::delete('public/img/'.$delete->url);

@@ -13,7 +13,11 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     public function photo(){
-        return $this->belongsTo(Photo::class,'id');
+        return $this->belongsTo(Photo::class);
+      }
+    
+      public function article(){
+        return $this->hasOne(Article::class);
       }
 
     /**

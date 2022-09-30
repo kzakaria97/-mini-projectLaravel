@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AvatarsController;
@@ -53,15 +54,24 @@ Route::get('/allUsers', function () {
 })->middleware(['auth'])->name('utilisateur');
 Route::get('/{id}/editUtilisateur',[UtilisateurController::class,'edit'])->name('editUtilisateur')->middleware(['auth']);
 Route::put('/{id}/updateUtilisateur',[UtilisateurController::class,'update'])->name('updateUtilisateur')->middleware(['auth']);
-Route::delete('/deleteUtilisateur/{id}',[UtilisateurController::class,'destroy']);
+Route::delete('/deleteUtilisateur/{id}',[UtilisateurController::class,'destroy'])->middleware(['auth']);
 
 
 //photo
-Route::get('/picture',[ImageController::class,'index'])->name('image');
-Route::post('/storeImage',[ImageController::class,'store']);
+Route::get('/picture',[ImageController::class,'index'])->name('image')->middleware(['auth']);
+Route::post('/storeImage',[ImageController::class,'store'])->middleware(['auth']);
 Route::delete('/deleteImage/{id}',[ImageController::class,'destroy']);
 
+//article
+Route::get('/article',[ArticleController::class,'index'])->name('article')->middleware(['auth']);
+Route::post('/createArticle',[ArticleController::class,'store'])->name('createArticle')->middleware(['auth']);
+Route::get('/{id}/editArticle',[ArticleController::class,'edit'])->name('editArticle')->middleware(['auth']);
+Route::put('/{id}/updateArticle',[ArticleController::class,'update'])->middleware(['auth']);
+Route::delete('/deleteArticle/{id}',[ArticleController::class,'destroy'])->middleware(['auth']);
 
+//galerie
+Route::get('galerie',[ImageController::class,'create'])->name('galerie')->middleware(['auth']);
+Route::get('/download/{id}',[ImageController::class,'download'])->middleware(['auth']);
 
 
 require __DIR__.'/auth.php';

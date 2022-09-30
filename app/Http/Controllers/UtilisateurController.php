@@ -29,8 +29,8 @@ class UtilisateurController extends Controller
             Storage::delete('public/img/' . $updatePhoto->url);
             Storage::put('public/img/', $request->file('url'));            
             $updatePhoto->url = $request->file('url')->hashName();
-            $updatePhoto->save();
         }
+        $updatePhoto->save();
         $updateProfile = User::find($id);
         $updateProfile->name = $request->name;
         $updateProfile->firstname = $request->firstname;
